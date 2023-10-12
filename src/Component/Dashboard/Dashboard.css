@@ -1,0 +1,33 @@
+.dashboard-navbar-container{
+    background-color: rgb(20, 20, 98);
+}
+
+
+.dashboard-container{
+    padding: 20px 30px;
+    display: flex;
+    height: 90px;
+    justify-content: space-between;
+    align-items: center;
+}
+.dashboard-menu{
+    width: 250px;
+    background-color:  #0068F7;
+    height: 100vh;
+    padding: 50px 30px!important;
+    transition: all 0.7s ;
+ 
+}
+.link{
+    text-decoration: none;
+}
+.dashboard-menu ul li{
+   list-style: none;
+   padding: 20px;
+}
+.middle-container{
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+     background-color: rgb(240, 240, 240);
+}
