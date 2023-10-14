@@ -1,21 +1,52 @@
-// src/components/Login.js
 import React, { useState } from 'react';
-import '../Component/Login.css'
-import { useNavigate, useNavigation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import '../Component/Login.css';
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const handleLogin = () => {
-  console.log (username,password)
-  alert('login sucess')
-  navigate('/')
+    console.log(username, password);
+    // You might want to remove this alert and add proper handling
+    alert('Login success');
+    navigate('/');
+  };
+
+  const handleForm = async (e) => {
+    e.preventDefault();
+    const userInformation = {
+      username,
+      password,
+    };
+    console.log(userInformation);
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userInformation),
+      });
+
+      if (response.ok) {
+        console.log('Login successful');
+        // Optionally, you can redirect the user to a success page.
+      } else {
+        console.error('Login failed');
+        // Handle the login failure, e.g., display an error message to the user.
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
     <div className="login-container">
       <h2>Login</h2>
-      <form style={{padding:"20px"}} className=''>
+      <form onSubmit={handleForm} style={{ padding: "20px" }}>
         <div className="form-group">
           <label>Username</label>
           <input
@@ -34,9 +65,7 @@ const navigate = useNavigate()
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="button" onClick={handleLogin}>
-          Login
-        </button>
+        <button onClick={handleLogin} type="submit">Login</button>
       </form>
     </div>
   );
