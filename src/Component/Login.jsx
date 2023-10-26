@@ -1,29 +1,25 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import React, { useState } from 'react';
+//import { useNavigate } from 'react-router-dom';
 import '../Component/Login.css';
 
+import React, { useState } from 'react';
+
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [token, setToken] = useState(null); // State to store the token
 
-  const handleLogin = () => {
-    console.log(username, password);
-    // You might want to remove this alert and add proper handling
-    alert('Login success');
-    navigate('/');
-  };
-
-  const handleForm = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+
     const userInformation = {
-      username,
+      email,
       password,
     };
-    console.log(userInformation);
 
     try {
-      const response = await fetch('/api/login', {
+      // Make a POST request to your login API endpoint
+      const response = await fetch('http://10.10.83.41:8088/api/Login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,6 +28,9 @@ const Login = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        const userToken = data.token; // Assuming your API returns the token
+        setToken(userToken); // Store the token in the component's state
         console.log('Login successful');
         // Optionally, you can redirect the user to a success page.
       } else {
@@ -44,31 +43,44 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleForm} style={{ padding: "20px" }}>
-        <div className="form-group">
-          <label>Username</label>
-          <input
-            type="text"
-            placeholder="Enter your username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button onClick={handleLogin} type="submit">Login</button>
-      </form>
+    <div>
+      <div className="login-container">
+        <h2>Login</h2>
+        {token ? (
+          <div >
+            <p>You are logged in.  </p>
+            <p>Token:</p>
+            <textarea style={{width:"400px",padding:"10px"}} name="" id="" cols="30" rows="10">{token}</textarea>
+            
+            {/* Display content for logged-in users */}
+          </div>
+        ) : (
+          <form onSubmit={handleLogin} style={{ padding: "20px" }}>
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                placeholder="Enter your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button type="submit">Login</button>
+          </form>
+        )}
+      </div>
     </div>
   );
 };
 
 export default Login;
+
