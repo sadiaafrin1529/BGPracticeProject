@@ -1,17 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+// import React from 'react';
+// import { Link } from 'react-router-dom';
 
-const DasboardMenu = () => {
-    return (
-        <div className='dashboard-menu'>
-        <ul>
-            <li ><Link style={{color:"white"}} className='link' to="/">Home</Link></li>
-            {/* <li><Link style={{color:"white"}} className='link' to="/dashboard/users">All Information</Link></li> */}
-            <li><Link style={{color:"white"}} className='link' to="/">UserAdded</Link></li>
+// const DasboardMenu = () => {
+//     return (
+//         <div className='dashboard-menu'>
+//         <ul>
+//             <li ><Link style={{color:"black"}} className='link' to="/">Home</Link></li>
+//             <li><Link style={{color:"black"}} className='link' to="/dashboard">All Information</Link></li>
+//             <li><Link style={{color:"black"}} className='link' to="/">UserAdded</Link></li>
             
-        </ul>
-    </div>
-    );
-};
+//         </ul>
+//     </div>
+//     );
+// };
 
-export default DasboardMenu;
+// export default DasboardMenu;

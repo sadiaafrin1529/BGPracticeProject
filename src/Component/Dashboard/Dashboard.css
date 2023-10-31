@@ -1,5 +1,5 @@
 .dashboard-navbar-container{
-    background-color: rgb(20, 20, 98);
+    background-color: rgba(201, 22, 52, 0.836);
 }
 
 
@@ -12,7 +12,7 @@
 }
 .dashboard-menu{
     width: 250px;
-    background-color:  #0068F7;
+    background-color:  #f8fafd;
     height: 100vh;
     padding: 50px 30px!important;
     transition: all 0.7s ;
@@ -27,7 +27,9 @@
 }
 .middle-container{
     padding: 40px;
-    width: 100%;
+    width: 90%;
     height: 100%;
      background-color: rgb(240, 240, 240);
+     margin: 0 auto;
+     
 }
