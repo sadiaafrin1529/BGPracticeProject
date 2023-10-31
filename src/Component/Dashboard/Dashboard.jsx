@@ -6,7 +6,7 @@ import { Link, Navigate, Outlet } from 'react-router-dom';
 import DashboardUser from './DashboardUser';
 import { authService } from '../Auth/AuthGuard';
 
-const auth = authService();
+//const auth = authService();
 const Dashboard = () => {
     const [activeMenu, setActiveMenu] = useState(true)
    // const login_storage_key = "bgr_login";
@@ -16,16 +16,19 @@ const Dashboard = () => {
     const handleLogout = () => {
         // Clear the user's login status
         // setLogin(null);
-        auth.signOut();
+        //auth.signOut();
+        authService.signOut(() => {
+            // Handle logout actions, if any
+        });
     
         // Clear user-related data from local storage
         // localStorage.removeItem(login_storage_key);
     
         
     };
-    if (!auth.isAuthenticated) {
+    if (!authService.isAuthenticated) {
         // Redirect to the login page if the user is not logged in
-        return <Navigate to="/login" />;
+       // return <Navigate to="/login" />;
     }
     return (
         <div>
@@ -39,7 +42,7 @@ const Dashboard = () => {
                         <p style={{ color: "white", fontWeight: "20px" }}>Todo</p>
                         <p style={{ color: "white", fontWeight: "20px" }}>Admin</p>
                         <ul style={{ display: "flex", listStyle: 'none' }}>
-                            {auth.isAuthenticated? (
+                            {authService.isAuthenticated? (
                                 <li onClick={() => handleLogout()}><Link to='/login'>Logout</Link></li>
                             ) : (
                                 <li><Link to='/login'>Login</Link></li>

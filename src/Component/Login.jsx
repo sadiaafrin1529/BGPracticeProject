@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const login_storage_key = "bgr_login";
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('Bg@gmail.com');
+  const [password, setPassword] = useState('Bg@2023');
   const [login, setLogin] = useState(null); // Initialize with login from local storage
 
 
@@ -13,7 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const from = location.state?.from?.pathname || "/dashboard";
-
+/*
 
   
   useEffect(() => {
@@ -22,7 +22,7 @@ const Login = () => {
         setLogin(JSON.parse(storedLogin));
         navigate(from, { replace: true });
     }
-}, [navigate, from]);
+}, [navigate, from]);*/
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -74,7 +74,7 @@ const Login = () => {
           setLogin(data);
           localStorage.setItem(login_storage_key, JSON.stringify(data));
           //console.log(data)
-          navigate(from, { replace: true });
+          navigate('/dashboard', { replace: true });
          
         }
   

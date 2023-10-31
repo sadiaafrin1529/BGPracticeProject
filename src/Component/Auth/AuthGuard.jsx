@@ -4,9 +4,9 @@ import { Route, Navigate } from "react-router-dom";
 const login_storage_key = "bgr_login";
 
 export const authService = {
-    isAuthenticated: (localStorage.getItem(login_storage_key) ? true : false),
+    isAuthenticated: localStorage.getItem(login_storage_key) ? true : false,
+    user: localStorage.getItem(login_storage_key) ? JSON.parse(localStorage.getItem(login_storage_key)) : {},
 
-    // user (isAuthenticated ? (JSON.parse(localStorage.getItem(login_storage_key))):{}),
     authenticated(cb) {
         this.isAuthenticated = true;
         setTimeout(cb, 100);
@@ -16,10 +16,16 @@ export const authService = {
         this.isAuthenticated = false;
         // Clear the authentication status and user information from local storage
         localStorage.removeItem(login_storage_key);
-        setUser({});
+        this.user = {};
         setTimeout(cb, 100);
     }
 };
+
+
+
+
+
+
 
 
 
