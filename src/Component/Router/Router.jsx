@@ -6,8 +6,11 @@ import TodoItems from "../TodoItems";
 import Registar from "../Registar";
 import Contact from "../Contact";
 import Dashboard from "../Dashboard/Dashboard";
-import { Component } from "react";
-import { AuthRoute } from "../Auth/AuthGuard";
+//import { Component } from "react";
+//import { AuthRoute } from "../Auth/AuthGuard";
+import PrivateRouter from "./PrivateRouter";
+import RedirectPage from "./Pages/RedirectPage";
+import About from "../About";
 
 
 const router = createBrowserRouter([
@@ -27,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact />
+            },
+            {
+                path:"/about",
+                element:<About/>
             }
 
         ]
@@ -40,61 +47,26 @@ const router = createBrowserRouter([
     {
         path: '/register',
         element: <Registar />,
-        exact: true,
+        //exact: true,
+    },
+    {
+        
+            path: '/redirect',
+            element: <RedirectPage />,
+            exact: true,
+          
     },
     {
         path: '/dashboard',
-        element: <Dashboard />,
-        auth: true,
+        element:<PrivateRouter><Dashboard /></PrivateRouter> ,
+        //element:<PrivateRouter><Dashboard /></PrivateRouter> ,
+        //auth: true,
 
     }
-
+    // PrivateRouter
 
 ])
-export class RouteBody extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            body: this.prepareRoutes(),
-        };
-    }
-    prepareRoutes = () => {
-        let body = AppRoutes.routes.map((routesInfo, index) => {
-            
-            if (routesInfo.hasOwnProperty('auth') && routesInfo.auth === true) {
-                console.log(routesInfo)
-                return (
-                    <AuthRoute
-                        key={index}
-                        path={routesInfo.path}
-                        component={routesInfo.component}
-                    />
-                );
-                
-            }
-             else {
-                return (
-                    <Route
-                        key={index}
-                        path={routesInfo.path}
-                        component={routesInfo.component}
-                        exact
-                    />
-                );
-            }
-        });
-        return body;
-    };
-    render() {
-        return (
-            <div>
-                <BrowserRouter>
-                    <Switch>{this.state.body}</Switch>
-                </BrowserRouter>
-            </div>
-        );
-    }
-}
+
 
 
 export default router;

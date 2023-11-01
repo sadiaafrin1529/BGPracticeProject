@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../Component/Login.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { authService } from './Auth/AuthGuard';
 
 const Login = () => {
   const login_storage_key = "bgr_login";
@@ -26,6 +27,12 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+   // After a successful login, set the user as authenticated
+   authService.authenticated(() => {
+    // Redirect to the dashboard
+    navigate('/dashboard');
+  });
 
     const userInformation = {
       email,

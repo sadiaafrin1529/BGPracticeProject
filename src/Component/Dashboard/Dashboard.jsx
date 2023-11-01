@@ -9,6 +9,7 @@ import { authService } from '../Auth/AuthGuard';
 //const auth = authService();
 const Dashboard = () => {
     const [activeMenu, setActiveMenu] = useState(true)
+    const user = authService.user;
    // const login_storage_key = "bgr_login";
     // const [user, setUser] = useState([])
     //const [login, setLogin] = authService()
@@ -38,12 +39,12 @@ const Dashboard = () => {
                         BGProject
                     </div>
                     <div style={{ display: "flex", gap: "20px" }}>
-                        <p style={{ color: "white", fontWeight: "20px" }}>Profile</p>
+                        <p style={{ color: "white", fontWeight: "20px" }}><Link style={{textDecoration:"none",color:"white"}} to='/'>Profile</Link></p>
                         <p style={{ color: "white", fontWeight: "20px" }}>Todo</p>
                         <p style={{ color: "white", fontWeight: "20px" }}>Admin</p>
                         <ul style={{ display: "flex", listStyle: 'none' }}>
                             {authService.isAuthenticated? (
-                                <li onClick={() => handleLogout()}><Link to='/login'>Logout</Link></li>
+                                <li onClick={() => handleLogout()}><Link style={{textDecoration:"none",color:"white"}} to='/login'>Logout</Link></li>
                             ) : (
                                 <li><Link to='/login'>Login</Link></li>
                             )}
@@ -62,7 +63,7 @@ const Dashboard = () => {
                 <div className='middle-container'>
 
                     <Outlet></Outlet>
-                    <DashboardUser />
+                    <DashboardUser  />
                 </div>
             </div>
         </div>

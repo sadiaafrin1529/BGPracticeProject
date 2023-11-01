@@ -27,8 +27,14 @@ const NavBar = () => {
                 
                   
                 </Nav>
-                <Nav>
-                <button onClick={handleLogOut} class="w3-button w3-padding-small">LogOut</button>
+                <Nav >
+                  <ul style={{display:"flex",justifyContent:"space-around",alignItems:'center',gap:"20px"}}>
+                    <li style={{listStyle:"none"}}><Link style={{textDecoration:"none"}} to='/dashboard'>Dashboard</Link></li>
+                    <li style={{listStyle:"none"}}><Link style={{textDecoration:"none"}} to='/about'>About</Link></li>
+                  </ul>
+                  
+                  
+                {/* <button onClick={handleLogOut} class="w3-button w3-padding-small">LogOut</button> */}
 
                   
                   

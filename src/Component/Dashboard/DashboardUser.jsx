@@ -7,12 +7,18 @@ const DashboardUser = () => {
  // const [user,setUser] = useState([])
    //const [login, setLogin] = useState(auth.user);
 //  console.log(login)
-
+const [user, setUser] = useState(null);
+useEffect(() => {
+  const userData = authService.user;
+  if (userData) {
+    setUser(userData);
+  }
+}, []);
 const login = authService.user;
-//console.log(login)
+console.log(login)
+
     return (
-      <div >
-      {authService.isAuthenticated ? <div >
+        <div >
           <div style={{display:"flex",alignItems:'center',justifyContent:"space-around"}}>
           <h6><span style={{border:"2px solid #6C5F5B",borderRadius:"5px",padding:"5px",boxShadow:"5px 5px 5px #B3A492" }}> Email</span>  <span style={{border:"2px solid #6C5F5B",borderRadius:"5px",padding:"5px" }}>{login.email}</span> </h6>
             <p style={{border:"2px solid #6C5F5B",borderRadius:"5px",padding:"5px",width:"60px" }}>
@@ -25,8 +31,6 @@ const login = authService.user;
               Update
             </p>
           </div>
-        </div> :
-        <div > You are not Authorize </div>}
         </div>
     );
 };
