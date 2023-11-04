@@ -7,7 +7,7 @@ const RedirectPage = () => {
     return (
         <Container>
             <Row>
-                <Col md={7} className='border border-1'>
+                <Col md={7} className='border border-1 mx-auto'>
                    <div>
                     <p>You must login to view page at <Link to="/login">Login</Link></p>
                    </div>

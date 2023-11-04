@@ -1,4 +1,4 @@
-import { Route, createBrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Router, Routes, createBrowserRouter } from "react-router-dom";
 import Main from "../Main";
 import Home from "../Home";
 import Login from "../Login";
@@ -11,6 +11,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import PrivateRouter from "./PrivateRouter";
 import RedirectPage from "./Pages/RedirectPage";
 import About from "../About";
+import { createRoot } from "react-dom/client";
 
 
 const router = createBrowserRouter([
@@ -50,22 +51,37 @@ const router = createBrowserRouter([
         //exact: true,
     },
     {
-        
+
             path: '/redirect',
             element: <RedirectPage />,
             exact: true,
-          
+
     },
     {
         path: '/dashboard',
         element:<PrivateRouter><Dashboard /></PrivateRouter> ,
-        //element:<PrivateRouter><Dashboard /></PrivateRouter> ,
+        //element:<Dashboard />,
         //auth: true,
 
     }
     // PrivateRouter
 
 ])
+
+// const root = createRoot(document.getElementById("root"));
+// root.render(
+//     <BrowserRouter basename='/'>
+//         <Routes>
+//             <Route path="/" element={<Main />}></Route>
+//             <Route path="/" element={<Home />}></Route>
+//             <Route path="/login" element={<Login/>}></Route>
+//             <Route path="/register" element={<Registar/>}></Route>
+//            <Route path="/redirect" element={<RedirectPage/>}></Route>
+//             <Route path="/dashboard" element={<PrivateRouter><Dashboard/></PrivateRouter>}></Route>
+//         </Routes>
+//     </BrowserRouter>
+// )
+
 
 
 

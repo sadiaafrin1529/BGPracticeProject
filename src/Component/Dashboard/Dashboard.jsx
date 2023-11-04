@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import '../Dashboard/Dashboard.css'
 
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import DashboardUser from './DashboardUser';
-import { authService } from '../Auth/AuthGuard';
+//import { authService } from '../Auth/AuthGuard';
+import { AuthContext } from '../Auth/auth.service';
 
 //const auth = authService();
 const Dashboard = () => {
+    const {signOut,isAuthenticated}=useContext(AuthContext)
     const [activeMenu, setActiveMenu] = useState(true)
-    const user = authService.user;
+    //const user = authService.user;
    // const login_storage_key = "bgr_login";
     // const [user, setUser] = useState([])
     //const [login, setLogin] = authService()
@@ -18,7 +20,7 @@ const Dashboard = () => {
         // Clear the user's login status
         // setLogin(null);
         //auth.signOut();
-        authService.signOut(() => {
+        signOut(() => {
             // Handle logout actions, if any
         });
     
@@ -27,7 +29,7 @@ const Dashboard = () => {
     
         
     };
-    if (!authService.isAuthenticated) {
+    if (!isAuthenticated) {
         // Redirect to the login page if the user is not logged in
        // return <Navigate to="/login" />;
     }
@@ -43,7 +45,7 @@ const Dashboard = () => {
                         <p style={{ color: "white", fontWeight: "20px" }}>Todo</p>
                         <p style={{ color: "white", fontWeight: "20px" }}>Admin</p>
                         <ul style={{ display: "flex", listStyle: 'none' }}>
-                            {authService.isAuthenticated? (
+                            {isAuthenticated? (
                                 <li onClick={() => handleLogout()}><Link style={{textDecoration:"none",color:"white"}} to='/login'>Logout</Link></li>
                             ) : (
                                 <li><Link to='/login'>Login</Link></li>

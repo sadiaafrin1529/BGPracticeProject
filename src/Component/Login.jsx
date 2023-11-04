@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import '../Component/Login.css';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { authService } from './Auth/AuthGuard';
+//import { authService } from './Auth/AuthGuard';
+import { AuthContext } from './Auth/auth.service';
 
 const Login = () => {
   const login_storage_key = "bgr_login";
   const [email, setEmail] = useState('Bg@gmail.com');
   const [password, setPassword] = useState('Bg@2023');
   const [login, setLogin] = useState(null); // Initialize with login from local storage
+  const {user,authenticated}=useContext(AuthContext)
 
 
   const location = useLocation()
@@ -29,7 +31,7 @@ const Login = () => {
     e.preventDefault();
     
    // After a successful login, set the user as authenticated
-   authService.authenticated(() => {
+  authenticated(() => {
     // Redirect to the dashboard
     navigate('/dashboard');
   });
@@ -39,7 +41,7 @@ const Login = () => {
       password,
     };
 
-    try {
+   try {
       // Make a POST request to your login API endpoint
       const response = await fetch('http://10.10.83.41:8088/api/Login', {
         method: 'POST',
@@ -65,8 +67,8 @@ const Login = () => {
               console.log(data)
             });
         */
-        /*
-        console.log(loginData)*/
+        
+        console.log(loginData)
         const res = await fetch('http://10.10.83.41:8088/api/User', {
           method: 'GET',
           headers: {
@@ -88,9 +90,31 @@ const Login = () => {
       } else {
         console.error('Login failed');
       }
-    } catch (error) {
+    }
+     catch (error) {
       console.error('Error:', error);
     }
+
+// useEffect(()=>{
+//   fetch('http://10.10.83.41:8088/api/User',{
+//     method:"GET",
+//     headers:{
+//       'Content-Type': 'application/json',
+//       'Authorization': 'Bearer '+loginData.access_token ,
+//     }
+
+//   })
+//   .then(res=>res.json())
+//   .then(data=>{
+   
+
+//   })
+// },[])
+
+
+
+
+
   };
   if (login) {
     return <Navigator to="/dashboard" />;
