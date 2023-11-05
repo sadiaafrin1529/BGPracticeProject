@@ -1,41 +1,52 @@
-import React, { useContext, useEffect, useState } from 'react';
-//import { authService } from '../Auth/AuthGuard';
-import { AuthContext } from '../Auth/auth.service';
+import React, { useEffect, useState } from 'react';
+import { authService } from '../Auth/AuthGuard';
+import { Col, Container, Row, Table } from 'react-bootstrap';
 
-//const auth = authService();
 const DashboardUser = () => {
-  //const login_storage_key = "bgr_login";
- // const [user,setUser] = useState([])
-   //const [login, setLogin] = useState(auth.user);
-//  console.log(login)
-const [users, setUser] = useState(null);
-const {authenticated,user}=useContext(AuthContext)
-//const authData = authService;
-//console.log(authData);
-useEffect(() => {
-  const userData = user;
-  console.log(userData)
-  setUser(userData);
-  // if (userData) {
-  //   setUser(userData);
-  //   console.log(user)
-  // }
-}, [user,authenticated]);
-const login = user;
-console.log(login)
+  const [user, setUser] = useState(authService.getUser());
 
-    return (
-        <div >
-          <div style={{display:"flex",alignItems:'center',justifyContent:"space-around"}}>
-          <h6><span style={{border:"2px solid #6C5F5B",borderRadius:"5px",padding:"5px",boxShadow:"5px 5px 5px #B3A492" }}> Email</span>  <span style={{border:"2px solid #6C5F5B",borderRadius:"5px",padding:"5px" }}>{login?.email}</span> </h6>
-            <p style={{border:"2px solid #6C5F5B",borderRadius:"5px",padding:"5px",width:"60px" }}>save</p>
-          </div>
-          <div style={{display:"flex",alignItems:'center',justifyContent:"space-around"}}>
-          <h6><span style={{border:"2px solid #6C5F5B",borderRadius:"5px",padding:"5px",boxShadow:"5px 5px 5px #B3A492" }}>DisplayName</span>  <span style={{border:"2px solid #6C5F5B",borderRadius:"5px",padding:"5px" }}>{login?.displayName}</span> </h6>
-            <p style={{border:"2px solid #6C5F5B",borderRadius:"5px",padding:"5px",width:"65px" }}>Update</p>
-          </div>
-        </div>
-    );
+  console.log(user)
+  /*
+  useEffect(() => {
+    // Fetch the user data from authService when the component mounts
+    const userData = authService.user;
+    console.log(userData)
+    if (userData) {
+      setUser(userData);
+    }
+  }, []);
+
+
+  useEffect(()=>{
+    fetch('')
+  },[])
+  */
+  return (
+    <Container>
+      <Row>
+        <Col className='mx-auto'>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                {/* <th>AllUser</th>
+                <th>Todo</th> */}
+                <th>Current user</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                {/* <td></td>
+                <td></td> */}
+                <td>{user ? user.email : ''}</td>
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default DashboardUser;

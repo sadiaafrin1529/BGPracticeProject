@@ -1,16 +1,13 @@
-import React, { useContext } from 'react';
-//import { authService } from '../Auth/AuthGuard';
+import React from 'react';
+import { authService } from '../Auth/AuthGuard';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../Auth/auth.service';
 
 const PrivateRouter = ({ children }) => {
-  const {isAuthenticated}=useContext(AuthContext)
-
-  if (!isAuthenticated) {
+  console.log('pr:',authService.isAuthenticated);
+  if (!authService.isAuthenticated) {
     // If the user is not authenticated, redirect to the RedirectPage
-    return <Navigate to="/redirect" replace />;
+    return <Navigate to="/login" replace />;
   }
-
   return children;
 };
 

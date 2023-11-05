@@ -1,29 +1,37 @@
-// // import React, { useState } from "react";
-// // import { Route, Navigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Route, Navigate } from "react-router-dom";
 
-// // const login_storage_key = "bgr_login";
-
-
-// // export const authService = {
+const login_storage_key = "bgr_login";
+export const authService = {
     
-// //     isAuthenticated: localStorage.getItem(login_storage_key) ? true : false,
-// //     user: localStorage.getItem(login_storage_key) ? JSON.parse(localStorage.getItem(login_storage_key)) : {},
-// //     authenticated(cb) {
-// //         this.isAuthenticated = true;
-// //         setTimeout(cb, 100);
-        
-// //     },
-
-// //     signOut(cb) {
-// //         this.isAuthenticated = false;
-// //         // Clear the authentication status and user information from local storage
-// //         localStorage.removeItem(login_storage_key);
-// //         this.user = {};
-// //         setTimeout(cb, 100);
-        
-// //     }
-// // };
-
+    //isAuthenticated: false,
+    isAuthenticated: (localStorage.getItem(login_storage_key) ? true : false),
+    //user: localStorage.getItem(login_storage_key) ? JSON.parse(localStorage.getItem(login_storage_key)) : {},
+    /*authenticated(cb) {
+        this.isAuthenticated = true;
+        setTimeout(cb, 100); 
+        //console.log(localStorage.getItem(login_storage_key));  
+    },*/
+    getUser(cb) {
+        if(this.isAuthenticated){
+            return JSON.parse(localStorage.getItem(login_storage_key));
+        }else return {};
+        setTimeout(cb, 100);
+    },
+    setLogin(data,cb){
+        this.isAuthenticated = true
+        localStorage.setItem(login_storage_key, JSON.stringify(data));
+        setTimeout(cb, 100); 
+    },
+    signOut(cb) {
+        this.isAuthenticated = false;
+        // Clear the authentication status and user information from local storage
+        localStorage.removeItem(login_storage_key);
+        //this.user = {};
+        setTimeout(cb, 100);
+    }
+    
+}; 
 
 
 
@@ -77,11 +85,11 @@
 // // }
 
 
-// //const isAuthenticated=localStorage.getItem(login_storage_key) ? true : false;
+ //const isAuthenticated=localStorage.getItem(login_storage_key) ? true : false;
 
-// //const [user, setUser] = isAuthenticated ? useState(JSON.parse(localStorage.getItem(login_storage_key))):useState({});
-// // const authenticated = (user, cb) => {
-// //     // Update the user state with the authenticated user
+ //const [user, setUser] = isAuthenticated ? useState(JSON.parse(localStorage.getItem(login_storage_key))):useState({});
+ // const authenticated = (user, cb) => {
+ //     // Update the user state with the authenticated user
 // //     setUser(user);
 // //     isAuthenticated = true;
 // //     // Store authentication status and user information in local storage

@@ -24,10 +24,7 @@ const router = createBrowserRouter([
                 element: <Home />
 
             },
-            {
-                path: "/todo",
-                element: <TodoItems />
-            },
+           
             {
                 path: '/contact',
                 element: <Contact />
@@ -51,6 +48,10 @@ const router = createBrowserRouter([
         //exact: true,
     },
     {
+        path: "/todo",
+        element: <TodoItems />
+    },
+    {
 
             path: '/redirect',
             element: <RedirectPage />,
@@ -60,7 +61,7 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element:<PrivateRouter><Dashboard /></PrivateRouter> ,
-        //element:<Dashboard />,
+        //element:<PrivateRouter><Dashboard /></PrivateRouter> ,
         //auth: true,
 
     }
@@ -68,12 +69,28 @@ const router = createBrowserRouter([
 
 ])
 
+
+// const router = () => {
+//     return (
+//         <BrowserRouter basename='/'>
+//        <Routes>
+//            <Route path="/" element={<Main />} /> 
+//             <Route path="/login" element={<Login/>}></Route>
+//             <Route path="/register" element={<Registar/>}></Route>
+//            <Route path="/redirect" element={<RedirectPage/>}></Route>
+//             <Route path="/dashboard" element={<PrivateRouter><Dashboard/></PrivateRouter>}></Route>
+//         </Routes>
+//     </BrowserRouter>
+//     );
+// };
+
+
+
 // const root = createRoot(document.getElementById("root"));
 // root.render(
 //     <BrowserRouter basename='/'>
 //         <Routes>
-//             <Route path="/" element={<Main />}></Route>
-//             <Route path="/" element={<Home />}></Route>
+//             <Route path="/" element={<Main />} /> 
 //             <Route path="/login" element={<Login/>}></Route>
 //             <Route path="/register" element={<Registar/>}></Route>
 //            <Route path="/redirect" element={<RedirectPage/>}></Route>
@@ -81,8 +98,4 @@ const router = createBrowserRouter([
 //         </Routes>
 //     </BrowserRouter>
 // )
-
-
-
-
 export default router;
