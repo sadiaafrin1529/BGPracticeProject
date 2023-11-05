@@ -40,6 +40,7 @@ const Dashboard = () => {
                     <div style={{ display: "flex", gap: "20px" }}>
                         <p style={{ color: "white", fontWeight: "20px" }}><Link style={{textDecoration:"none",color:"white"}} to='/'>Profile</Link></p>
                         <p style={{ color: "white", fontWeight: "20px" }}><Link style={{textDecoration:"none",color:"white"}} to='/todo'>Todo</Link></p>
+                        <p style={{ color: "white", fontWeight: "20px" }}><Link style={{textDecoration:"none",color:"white"}} to='/contact'>contact</Link></p>
                         <p style={{ color: "white", fontWeight: "20px" }}>Admin</p>
                         <ul style={{ display: "flex", listStyle: 'none' }}>
                             {authService.isAuthenticated? (
